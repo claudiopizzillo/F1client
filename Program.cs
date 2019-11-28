@@ -23,8 +23,8 @@ namespace F1Client_net
 
                 using (var hubConnection = new HubConnection("https://livetiming.formula1.com/signalr"))
                 {
-                    hubConnection.TraceLevel = TraceLevels.All;
-                    hubConnection.TraceWriter = Console.Out;
+                    //hubConnection.TraceLevel = TraceLevels.All;
+                    //hubConnection.TraceWriter = Console.Out;
                     hubConnection.ConnectionSlow += () => Console.WriteLine("Connection problems.");
                     hubConnection.Error += ex => Console.WriteLine("SignalR error: {0}", ex.Message);
                     hubConnection.Received += data => Console.WriteLine("MESSAGE RECEIVED {0}", data.ToString());
@@ -41,8 +41,6 @@ namespace F1Client_net
                     subscriptions.Add("StreamingStatus");
 
                     var f1timing = hubConnection.CreateHubProxy("Streaming");
-
-                    f1timing.On("StreamingStatus", () => Console.WriteLine("Notified!"));
 
                     await hubConnection.Start();
 

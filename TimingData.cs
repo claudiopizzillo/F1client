@@ -300,7 +300,7 @@ namespace F1Client_net
 
         public class DR4
         {
-            public List<object> F { get; set; }
+            public List<string> F { get; set; }
         }
 
         public class Data6

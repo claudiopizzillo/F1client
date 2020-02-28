@@ -115,6 +115,7 @@
     <None Include="F1Client-net_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="README.md" />
+    <None Include="Release.zip" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

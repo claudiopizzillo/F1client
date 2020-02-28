@@ -250,27 +250,46 @@ namespace F1Client_net
 
 
 
-            var secondcombine = firstcombine.Zip(freedata.DR, (a, b) => new
-            {
-                POS = b.F.ElementAt(3).ToString(),
-                a.FullName,
-                a.Initials,
-                a.Num,
-                a.Gap,
-                a.Interval,
-                a.Lap,
-                a.S1,
-                a.S2,
-                a.S3,
-                a.SP1,
-                a.SP2,
-                a.SP3,
-                a.SP4,
-                a.PIT
-            });
+            var secondcombine = (freedata.S == "Race") ?
+                firstcombine.Zip(freedata.DR, (a, b) => new
+                {
+                    POS = b.F.ElementAt(3),
+                    a.FullName,
+                    a.Initials,
+                    a.Num,
+                    a.Gap,
+                    a.Interval,
+                    a.Lap,
+                    a.S1,
+                    a.S2,
+                    a.S3,
+                    a.SP1,
+                    a.SP2,
+                    a.SP3,
+                    a.SP4,
+                    a.PIT
+                }) :
+                    firstcombine.Zip(bestdata.DR, (a, b) => new
+                    {
+                    POS = b.B.ElementAt(3),
+                    a.FullName,
+                    a.Initials,
+                    a.Num,
+                    a.Gap,
+                    a.Interval,
+                    a.Lap,
+                    a.S1,
+                    a.S2,
+                    a.S3,
+                    a.SP1,
+                    a.SP2,
+                    a.SP3,
+                    a.SP4,
+                    a.PIT
+                    });
 
-            var ordered = from x in secondcombine orderby x.POS.Length, x.POS ascending select x;
 
+            var ordered = from x in secondcombine orderby x.POS == null, x.POS ascending select x;
 
 
             Console.WriteLine(new string('-', 100));
